@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/common">
+
+<head>
+    <meta charset="UTF-8">
+    <title>글 목록</title>
+</head>
+
+<!-- index.html 고유 CSS 추가 -->
+<th:block layout:fragment="css">
+</th:block>
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+</th:block>
+
+<div layout:fragment="content">
+    <form role="form" th:object="${document}" th:action="@{/delete}" method="post">
+        제목 : <input type="text" name="title" th:value="${document.title}" readonly><br>
+        작성자 : <input type="text" name="userId" th:value="${document.user_id}" readonly><br>
+        <textarea name="content" th:text="${document.content}" readonly></textarea><br>
+        <input type="hidden" name="id" th:field="*{id}" th:value="${document.id}" readonly/>
+
+        <a th:href="'/update?id='+${document.id}" th:text="수정"></a>
+        <input type="submit" value="삭제">
+    </form>
+</div>
+</html>
